@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KerasInsight
 
-## Getting Started
+## Overview
 
-First, run the development server:
+KerasInsight is a tool designed to facilitate the exploration and understanding of Keras documentation. By scraping, processing, and embedding content from Keras, users can interactively query and retrieve relevant information, including code snippets and summaries, through a user-friendly interface.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Web Scraping:** Extracts content from Keras documentation, organizing text and code into structured JSON files.
+- **Data Processing:** Preprocesses scraped data by chunking it into meaningful sections that combine text and code for embedding.
+- **Vector Database:** Stores the processed data in Pinecone for efficient similarity search.
+- **LLM Integration:** Utilizes large language models to answer user queries by retrieving and processing relevant information from the vector database.
+- **User Interface:** A Next.js-based interface that allows users to query the knowledge base through a chat-like window, enabling dynamic and interactive exploration.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Workflow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Scraping Keras Documentation
 
-## Learn More
+- Users can specify endpoints to scrape.
+- The content is separated into chunks, each containing a main title, section titles, text, code, and summaries.
 
-To learn more about Next.js, take a look at the following resources:
+### Data Embedding
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- The combined text and code are embedded using a Hugging Face model and stored in Pinecone.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Querying
 
-## Deploy on Vercel
+- Users interact with the system through a chat interface.
+- Queries are processed using similarity search to retrieve relevant information from the vector database.
+- If relevant information is found, the LLM generates a response; otherwise, users are informed of the absence of relevant data.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
