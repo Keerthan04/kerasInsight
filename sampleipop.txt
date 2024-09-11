@@ -1,0 +1,225 @@
+a sample ip and op to the query 'Explain me about Sequential API'
+
+Results from the query:
+ {'matches': [{'id': 'https://keras.io/api/models/model/-4',
+              'metadata': {'code': 'model=keras.Sequential([keras.Input(shape=(None,None,3)),keras.layers.Conv2D(filters=32,kernel_size=3),])\n'
+                                   '\n',
+                           'content': 'In addition,keras.Sequentialis a '
+                                      'special case of model where\n'
+                                      'the model is purely a stack of '
+                                      'single-input, single-output layers.\n'
+                                      '[source]\n',
+                           'summary': 'In addition,keras.Sequentialis a '
+                                      'special case of model where the model '
+                                      'is purely a stack of single-input, '
+                                      'single-output layers. [source]',
+                           'title': 'With theSequentialclass'},
+              'score': 0.329645097,
+              'values': []},
+             {'id': 'https://keras.io/api/models/sequential/-2',
+              'metadata': {'code': 'Sequential.add(layer,rebuild=True)\n\n',
+                           'content': 'Adds a layer instance on top of the '
+                                      'layer stack.\n'
+                                      'Arguments\n'
+                                      '[source]\n',
+                           'summary': 'Adds a layer instance on top of the '
+                                      'layer stack. Arguments [source]',
+                           'title': 'addmethod'},
+              'score': 0.323012054,
+              'values': []},
+             {'id': 'https://keras.io/api/models/sequential/-1',
+              'metadata': {'code': 'keras.Sequential(layers=None,trainable=True,name=None)\n'
+                                   '\n'
+                                   'model=keras.Sequential()model.add(keras.Input(shape=(16,)))model.add(keras.layers.Dense(8))# '
+                                   'Note that you can also omit the initial '
+                                   "`Input`.# In that case the model doesn't "
+                                   'have any weights until the first call# to '
+                                   'a training/evaluation method (since it '
+                                   "isn't yet "
+                                   'built):model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(4))# '
+                                   'model.weights not created yet# Whereas if '
+                                   'you specify an `Input`, the model gets '
+                                   'built# continuously as you are adding '
+                                   'layers:model=keras.Sequential()model.add(keras.Input(shape=(16,)))model.add(keras.layers.Dense(8))len(model.weights)# '
+                                   'Returns "2"# When using the delayed-build '
+                                   'pattern (no input shape specified), you '
+                                   'can# choose to manually build your model '
+                                   'by calling# '
+                                   '`build(batch_input_shape)`:model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(4))model.build((None,16))len(model.weights)# '
+                                   'Returns "4"# Note that when using the '
+                                   'delayed-build pattern (no input shape '
+                                   'specified),# the model gets built the '
+                                   'first time you call `fit`, `eval`, or '
+                                   '`predict`,# or the first time you call the '
+                                   'model on some input '
+                                   "data.model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(1))model.compile(optimizer='sgd',loss='mse')# "
+                                   'This builds the model for the first '
+                                   'time:model.fit(x,y,batch_size=32,epochs=10)\n'
+                                   '\n',
+                           'content': 'Sequentialgroups a linear stack of '
+                                      'layers into aModel.\n'
+                                      'Examples\n'
+                                      '[source]\n',
+                           'summary': 'Sequentialgroups a linear stack of '
+                                      'layers into aModel. Examples [source]',
+                           'title': 'Sequentialclass'},
+              'score': 0.293929577,
+              'values': []},
+             {'id': 'https://keras.io/api/models/sequential/-3',
+              'metadata': {'code': 'Sequential.pop(rebuild=True)\n\n',
+                           'content': 'Removes the last layer in the model.\n',
+                           'summary': 'Removes the last layer in the model.',
+                           'title': 'popmethod'},
+              'score': 0.266927034,
+              'values': []},
+             {'id': 'https://keras.io/api/models/model/-2',
+              'metadata': {'code': 'inputs=keras.Input(shape=(37,))x=keras.layers.Dense(32,activation="relu")(inputs)outputs=keras.layers.Dense(5,activation="softmax")(x)model=keras.Model(inputs=inputs,outputs=outputs)\n'
+                                   '\n'
+                                   'inputs=keras.Input(shape=(None,None,3))processed=keras.layers.RandomCrop(width=128,height=128)(inputs)conv=keras.layers.Conv2D(filters=32,kernel_size=3)(processed)pooling=keras.layers.GlobalAveragePooling2D()(conv)feature=keras.layers.Dense(10)(pooling)full_model=keras.Model(inputs,feature)backbone=keras.Model(processed,conv)activations=keras.Model(conv,feature)\n'
+                                   '\n',
+                           'content': 'You start fromInput,\n'
+                                      'you chain layer calls to specify the '
+                                      "model's forward pass,\n"
+                                      'and finally, you create your model from '
+                                      'inputs and outputs:\n'
+                                      'Note: Only dicts, lists, and tuples of '
+                                      'input tensors are supported. Nested\n'
+                                      'inputs are not supported (e.g. lists of '
+                                      'list or dicts of dict).\n'
+                                      'A new Functional API model can also be '
+                                      'created by using the\n'
+                                      'intermediate tensors. This enables you '
+                                      'to quickly extract sub-components\n'
+                                      'of the model.\n'
+                                      'Example\n'
+                                      'Note that '
+                                      'thebackboneandactivationsmodels are '
+                                      'not\n'
+                                      'created withkeras.Inputobjects, but '
+                                      'with the tensors that originate\n'
+                                      'fromkeras.Inputobjects. Under the hood, '
+                                      'the layers and weights will\n'
+                                      'be shared across these models, so that '
+                                      'user can train thefull_model, and\n'
+                                      'usebackboneoractivationsto do feature '
+                                      'extraction.\n'
+                                      'The inputs and outputs of the model can '
+                                      'be nested structures of tensors as\n'
+                                      'well, and the created models are '
+                                      'standard Functional API models that '
+                                      'support\n'
+                                      'all the existing APIs.\n',
+                           'summary': 'You start fromInput, you chain layer '
+                                      "calls to specify the model's forward "
+                                      'pass, and finally, you create your '
+                                      'model from inputs and outputs: Note: '
+                                      'Only dicts, lists, and tuples of input '
+                                      'tensors are supported. Nested inputs '
+                                      'are not supported (e.g. lists of list '
+                                      'or dicts of dict). A new Functional API '
+                                      'model can also be created by using the '
+                                      'intermediate tensors. This enables you '
+                                      'to quickly extract sub-components of '
+                                      'the model. Example Note that '
+                                      'thebackboneandactivationsmodels are not '
+                                      'created withkeras.Inputobjects, but '
+                                      'with the tensors that originate '
+                                      'fromkeras.Inputobjects. Under the hood, '
+                                      'the layers and weights will be shared '
+                                      'across these models, so that user can '
+                                      'train thefull_model, and '
+                                      'usebackboneoractivationsto do feature '
+                                      'extraction. The inputs and outputs of '
+                                      'the model can be nested structures of '
+                                      'tensors as well, and the created models '
+                                      'are standard Functional API models that '
+                                      'support all the existing APIs.',
+                           'title': 'With the "Functional API"'},
+              'score': 0.249457,
+              'values': []}],
+ 'namespace': 'dlprojectlearning',
+ 'usage': {'read_units': 6}}
+
+Query results:
+[{'id': 'https://keras.io/api/models/model/-4', 'score': 0.329645097, 'title': 'With theSequentialclass', 'summary': 'In addition,keras.Sequentialis a special case of model where the model is purely a stack of single-input, single-output layers. [source]', 'content': 'In addition,keras.Sequentialis a special case of model where\nthe model is purely a stack of single-input, single-output layers.\n[source]\n', 'code': 'model=keras.Sequential([keras.Input(shape=(None,None,3)),keras.layers.Conv2D(filters=32,kernel_size=3),])\n\n'}, {'id': 'https://keras.io/api/models/sequential/-2', 'score': 0.323012054, 'title': 'addmethod', 'summary': 'Adds a layer instance on top of the layer stack. Arguments [source]', 'content': 'Adds a layer instance on top of the layer stack.\nArguments\n[source]\n', 'code': 'Sequential.add(layer,rebuild=True)\n\n'}, {'id': 'https://keras.io/api/models/sequential/-1', 'score': 0.293929577, 'title': 'Sequentialclass', 'summary': 'Sequentialgroups a linear stack of layers into aModel. Examples [source]', 'content': 'Sequentialgroups a linear stack of layers into aModel.\nExamples\n[source]\n', 'code': 'keras.Sequential(layers=None,trainable=True,name=None)\n\nmodel=keras.Sequential()model.add(keras.Input(shape=(16,)))model.add(keras.layers.Dense(8))# Note that you can also omit the initial `Input`.# In that case the model doesn\'t have any weights until the first call# to a training/evaluation method (since it isn\'t yet built):model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(4))# model.weights not created yet# Whereas if you specify an `Input`, the model gets built# continuously as you are adding layers:model=keras.Sequential()model.add(keras.Input(shape=(16,)))model.add(keras.layers.Dense(8))len(model.weights)# Returns "2"# When using the delayed-build pattern (no input shape specified), you can# choose to manually build your model by calling# `build(batch_input_shape)`:model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(4))model.build((None,16))len(model.weights)# Returns "4"# Note that when using the delayed-build pattern (no input shape specified),# the model gets built the first time you call `fit`, `eval`, or `predict`,# or the first time you call the model on some input data.model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(1))model.compile(optimizer=\'sgd\',loss=\'mse\')# This builds the model for the first time:model.fit(x,y,batch_size=32,epochs=10)\n\n'}, {'id': 'https://keras.io/api/models/sequential/-3', 'score': 0.266927034, 'title': 'popmethod', 'summary': 'Removes the last layer in the model.', 'content': 'Removes the last layer in the model.\n', 'code': 'Sequential.pop(rebuild=True)\n\n'}, {'id': 'https://keras.io/api/models/model/-2', 'score': 0.249457, 'title': 'With the "Functional API"', 'summary': "You start fromInput, you chain layer calls to specify the model's forward pass, and finally, you create your model from inputs and outputs: Note: Only dicts, lists, and tuples of input tensors are supported. Nested inputs are not supported (e.g. lists of list or dicts of dict). A new Functional API model can also be created by using the intermediate tensors. This enables you to quickly extract sub-components of the model. Example Note that thebackboneandactivationsmodels are not created withkeras.Inputobjects, but with the tensors that originate fromkeras.Inputobjects. Under the hood, the layers and weights will be shared across these models, so that user can train thefull_model, and usebackboneoractivationsto do feature extraction. The inputs and outputs of the model can be nested structures of tensors as well, and the created models are standard Functional API models that support all the existing APIs.", 'content': "You start fromInput,\nyou chain layer calls to specify the model's forward pass,\nand finally, you create your model from inputs and outputs:\nNote: Only dicts, lists, and tuples of input tensors are supported. Nested\ninputs are not supported (e.g. lists of list or dicts of dict).\nA new Functional API model can also be created by using the\nintermediate tensors. This enables you to quickly extract sub-components\nof the model.\nExample\nNote that thebackboneandactivationsmodels are not\ncreated withkeras.Inputobjects, but with the tensors that originate\nfromkeras.Inputobjects. Under the hood, the layers and weights will\nbe shared across these models, so that user can train thefull_model, and\nusebackboneoractivationsto do feature extraction.\nThe inputs and outputs of the model can be nested structures of tensors as\nwell, and the created models are standard Functional API models that support\nall the existing APIs.\n", 'code': 'inputs=keras.Input(shape=(37,))x=keras.layers.Dense(32,activation="relu")(inputs)outputs=keras.layers.Dense(5,activation="softmax")(x)model=keras.Model(inputs=inputs,outputs=outputs)\n\ninputs=keras.Input(shape=(None,None,3))processed=keras.layers.RandomCrop(width=128,height=128)(inputs)conv=keras.layers.Conv2D(filters=32,kernel_size=3)(processed)pooling=keras.layers.GlobalAveragePooling2D()(conv)feature=keras.layers.Dense(10)(pooling)full_model=keras.Model(inputs,feature)backbone=keras.Model(processed,conv)activations=keras.Model(conv,feature)\n\n'}]
+
+Prompt to Ollama LLM:
+You are an AI assistant designed to provide detailed and accurate explanations based on provided information. Your task is to explain concepts clearly by synthesizing the information given below. Please ensure that the response is coherent, relevant to the user query, and incorporates the examples provided. If necessary, make logical connections between different pieces of information to create a comprehensive explanation.
+
+Title: With theSequentialclass
+Summary: In addition,keras.Sequentialis a special case of model where the model is purely a stack of single-input, single-output layers. [source]
+
+Code: model=keras.Sequential([keras.Input(shape=(None,None,3)),keras.layers.Conv2D(filters=32,kernel_size=3),])
+
+
+
+Title: addmethod
+Summary: Adds a layer instance on top of the layer stack. Arguments [source]
+
+Code: Sequential.add(layer,rebuild=True)
+
+
+
+Title: Sequentialclass
+Summary: Sequentialgroups a linear stack of layers into aModel. Examples [source]
+
+Code: keras.Sequential(layers=None,trainable=True,name=None)
+
+model=keras.Sequential()model.add(keras.Input(shape=(16,)))model.add(keras.layers.Dense(8))# Note that you can also omit the initial `Input`.# In that case the model doesn't have any weights until the first call# to a training/evaluation method (since it isn't yet built):model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(4))# model.weights not created yet# Whereas if you specify an `Input`, the model gets built# continuously as you are adding layers:model=keras.Sequential()model.add(keras.Input(shape=(16,)))model.add(keras.layers.Dense(8))len(model.weights)# Returns "2"# When using the delayed-build pattern (no input shape specified), you can# choose to manually build your model by calling# `build(batch_input_shape)`:model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(4))model.build((None,16))len(model.weights)# Returns "4"# Note that when using the delayed-build pattern (no input shape specified),# the model gets built the first time you call `fit`, `eval`, or `predict`,# or the first time you call the model on some input data.model=keras.Sequential()model.add(keras.layers.Dense(8))model.add(keras.layers.Dense(1))model.compile(optimizer='sgd',loss='mse')# This builds the model for the first time:model.fit(x,y,batch_size=32,epochs=10)
+
+
+
+Title: popmethod
+Summary: Removes the last layer in the model.
+
+Code: Sequential.pop(rebuild=True)
+
+
+
+Title: With the "Functional API"
+Summary: You start fromInput, you chain layer calls to specify the model's forward pass, and finally, you create your model from inputs and outputs: Note: Only dicts, lists, and tuples of input tensors are supported. Nested inputs are not supported (e.g. lists of list or dicts of dict). A new Functional API model can also be created by using the intermediate tensors. This enables you to quickly extract sub-components of the model. Example Note that thebackboneandactivationsmodels are not created withkeras.Inputobjects, but with the tensors that originate fromkeras.Inputobjects. Under the hood, the layers and weights will be shared across these models, so that user can train thefull_model, and usebackboneoractivationsto do feature extraction. The inputs and outputs of the model can be nested structures of tensors as well, and the created models are standard Functional API models that support all the existing APIs.
+
+Code: inputs=keras.Input(shape=(37,))x=keras.layers.Dense(32,activation="relu")(inputs)outputs=keras.layers.Dense(5,activation="softmax")(x)model=keras.Model(inputs=inputs,outputs=outputs)
+
+inputs=keras.Input(shape=(None,None,3))processed=keras.layers.RandomCrop(width=128,height=128)(inputs)conv=keras.layers.Conv2D(filters=32,kernel_size=3)(processed)pooling=keras.layers.GlobalAveragePooling2D()(conv)feature=keras.layers.Dense(10)(pooling)full_model=keras.Model(inputs,feature)backbone=keras.Model(processed,conv)activations=keras.Model(conv,feature)
+
+
+
+User Query: Explain me about the Sequential API
+
+
+#THE LLM RESPONSE FROM Ollama(MISTRAL IS USED HERE)
+Ollama LLM Response:
+ The Sequential API is a specialized model architecture in Keras, a popular deep learning library. It's designed to create models that are purely a stack of single-input, single-output layers. This makes it easy to build models sequentially by adding layers one after another.
+
+To create a Sequential model, you can use the `keras.Sequential()` function. You can also provide an optional list of layers in the constructor if you want to pre-define some layers for your model.
+
+Here's an example:
+
+```python
+# Creating a Sequential model with no layers initially
+model = keras.Sequential()
+
+# Adding layers to the model
+model.add(keras.layers.Dense(8))  # This creates a Dense layer with 8 units
+model.add(keras.layers.Dense(4))  # This adds another Dense layer with 4 units
+```
+
+In the above example, we're creating a Sequential model and adding two Dense layers to it. The first Dense layer doesn't have an input since we didn't specify one (you can optionally provide an Input layer for your model). The second Dense layer takes the output from the first one as its input.
+
+The `Sequential.add()` method is used to add a layer instance on top of the layer stack. You can keep adding layers in this manner to build your model.
+
+When you create a Sequential model, it doesn't have any weights until the first call to a training or evaluation method. This is because it isn't yet built. However, if you specify an Input, the model gets built continuously as you add more layers. For example:
+
+```python
+# Creating a Sequential model with an input layer
+model = keras.Sequential()
+model.add(keras.Input(shape=(16,)))  # This creates an Input layer with shape (16,)
+model.add(keras.layers.Dense(8))    # This adds a Dense layer on top of the Input layer
+```
+
+In this case, the model gets built as soon as you add the first layer (the Input layer), and it will have weights associated with it. You can check the number of weights in your model using `len(model.weights)`.
+
+You can also choose to manually build your model by calling `build(batch_input_shape)` when you're using the delayed-build pattern (no input shape specified). This allows you to create a Sequential model without an Input layer, and then add layers to it. The model will be built when you call `fit`, `eval`, or `predict` on it, or when you provide some input data.
+
+Lastly, the `Sequential.pop(rebuild=True)` method is used to remove the last layer in the model. This can be useful for modifying your model dynamically during training or other operations.
