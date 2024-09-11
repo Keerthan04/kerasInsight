@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+aiohttp
+beautifulsoup4
+nest_asyncio
+sentence-transformers
+transformers
+#pinecone-client now only pinecone we did so using only that
+torch
+trulens-eval
+pinecone

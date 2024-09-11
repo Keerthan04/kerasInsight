@@ -37,3 +37,6 @@ next-env.d.ts
 
 /.venv
 test.py
+new_test.py
+backend/venv
+backend/config.py
