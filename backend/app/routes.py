@@ -8,8 +8,10 @@ from database.pinecone_manager import PineconeManager
 from embedding.text_embedder import TextEmbedder
 from retrieval.information_retriever import InformationRetriever
 from llm.ollama_responder import OllamaLLMResponder
+from evaluation.newRecentEvaluation import CustomEvaluator,LocalEvaluator
+from llm.llm_responder import LLMResponder
 # from evaluation.rag_evaluator import RAGEvaluator
-from config import API_KEY, INDEX_NAME, MODEL_NAME, OLLAMA_MODEL_NAME, OPENAI_API_KEY #use of config is like this
+from config import API_KEY, INDEX_NAME, MODEL_NAME, OLLAMA_MODEL_NAME, OPENAI_API_KEY,GEMMA_MODEL_SAVED_DIR #use of config is like this
 
 router = APIRouter()
 
@@ -70,22 +72,34 @@ async def query_information(query_input: QueryInput):
     print(query_input.query)
     results = await retriever.query_index(query_input.query)
     
-    ollama_responder = OllamaLLMResponder(OLLAMA_MODEL_NAME)
+    #these are ollama usage and doing
+    # ollama_responder = OllamaLLMResponder(OLLAMA_MODEL_NAME)
     
-    prompt = ollama_responder.construct_prompt(results, query_input.query)
-    response = ollama_responder.generate_response(prompt)
+    # prompt = ollama_responder.construct_prompt(results, query_input.query)
+    # response = ollama_responder.generate_response(prompt)
     
     # Evaluate the response
     # evaluator = RAGEvaluator(OPENAI_API_KEY)
     # evaluation = evaluator.evaluate(query_input.query, prompt, response)
     
+    #trying with the saved model of gemma
+    
+    llm_responder = LLMResponder(model_dir=GEMMA_MODEL_SAVED_DIR)
+    prompt,context = llm_responder.construct_prompt(results=results,query=query_input)
+    response = llm_responder.generate_response(prompt=prompt)
+    
+    #evaluating with new evaluator to test
+    evaluator = CustomEvaluator()
+    eval_results = evaluator.evaluate(query_input, response, context)
+    
     #TODO
     #now initialize of the pinecone index everytime  in the pinecone manger so better to do is on startup shd be initialized and also that when the req and res the mistral is taking around 4 to 5 mins to respond so see that and also using diff llm and also hf llm and evaluation
     return {
         "query": query_input.query,
-        "results": results,
+        # "results": results, ->for testing dont need now
         "llm_response": response,
         # "evaluation": evaluation
+        "evaluation": eval_results
     }
     
     
