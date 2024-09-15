@@ -28,7 +28,7 @@ class InformationRetriever:
             results = self.index.query(
                 vector=query_embedding,
                 namespace=NAMESPACE,
-                top_k=5,
+                top_k=3,#change to 5 or so we shd see that
                 include_metadata=True
             )
             print('Results from the query:\n', results)
@@ -36,12 +36,12 @@ class InformationRetriever:
             for match in results.get('matches', []):
                 metadata = match.get('metadata', {})
                 formatted_results.append({
-                    'id': match.get('id'),
-                    'score': match.get('score'),
-                    'title': metadata.get('title', "No title"),
-                    'summary': metadata.get('summary', "No summary"),
-                    'content': metadata.get('content', "No content"),
-                    'code': metadata.get('code', "No code")
+                    "id": match.get('id'),
+                    "score": match.get('score'),
+                    "title": metadata.get('title', "No title"),
+                    "summary": metadata.get('summary', "No summary"),
+                    "content": metadata.get('content', "No content"),
+                    "code": metadata.get('code', "No code")
                 })
 
             return formatted_results

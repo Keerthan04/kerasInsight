@@ -7,11 +7,14 @@ from scraper.web_scraper import WebScraper
 from database.pinecone_manager import PineconeManager
 from embedding.text_embedder import TextEmbedder
 from retrieval.information_retriever import InformationRetriever
-from llm.ollama_responder import OllamaLLMResponder
-from evaluation.newRecentEvaluation import CustomEvaluator,LocalEvaluator
+# from llm.ollama_responder import OllamaLLMResponder
+# from evaluation.newRecentEvaluation import CustomEvaluator,LocalEvaluator
 from llm.llm_responder import LLMResponder
+from llm.gemini_responder import GeminiResponder
+from evaluation.gemini_evaluator import GeminiRAGEvaluator
+
 # from evaluation.rag_evaluator import RAGEvaluator
-from config import API_KEY, INDEX_NAME, MODEL_NAME, OLLAMA_MODEL_NAME, OPENAI_API_KEY,GEMMA_MODEL_SAVED_DIR #use of config is like this
+from config import API_KEY, INDEX_NAME, MODEL_NAME, OLLAMA_MODEL_NAME, OPENAI_API_KEY,GEMMA_MODEL_SAVED_DIR,GEMINI_API_KEY #use of config is like this
 
 router = APIRouter()
 
@@ -84,14 +87,23 @@ async def query_information(query_input: QueryInput):
     
     #trying with the saved model of gemma
     
-    llm_responder = LLMResponder(model_dir=GEMMA_MODEL_SAVED_DIR)
-    prompt,context = llm_responder.construct_prompt(results=results,query=query_input)
-    response = llm_responder.generate_response(prompt=prompt)
+    # llm_responder = LLMResponder(model_dir=GEMMA_MODEL_SAVED_DIR)
+    # prompt,context = llm_responder.construct_prompt(results=results,query=query_input)
+    # response = llm_responder.generate_response(prompt=prompt)
     
-    #evaluating with new evaluator to test
-    evaluator = CustomEvaluator()
-    eval_results = evaluator.evaluate(query_input, response, context)
+    # #evaluating with new evaluator to test
+    # evaluator = CustomEvaluator()
+    # eval_results = evaluator.evaluate(query_input, response, context)
     
+    #Trying with the finetuned model and the TruLensEvaluator
+    
+    gemini_responder = GeminiResponder(GEMINI_API_KEY=GEMINI_API_KEY)
+    prompt,context = gemini_responder.construct_prompt(results=results,query=query_input)
+    response = gemini_responder.generate_response(prompt=prompt)
+    
+    #evaluation part(THE CONTEXT PART AND THE LITELLM KA API SOMETHING LEFT)
+    # evaluator = GeminiRAGEvaluator(GEMINI_API_KEY,context)
+    # eval_results = evaluator.evaluate(query_input,context,response)
     #TODO
     #now initialize of the pinecone index everytime  in the pinecone manger so better to do is on startup shd be initialized and also that when the req and res the mistral is taking around 4 to 5 mins to respond so see that and also using diff llm and also hf llm and evaluation
     return {
@@ -99,7 +111,7 @@ async def query_information(query_input: QueryInput):
         # "results": results, ->for testing dont need now
         "llm_response": response,
         # "evaluation": evaluation
-        "evaluation": eval_results
+        # "evaluation": eval_results
     }
     
     
