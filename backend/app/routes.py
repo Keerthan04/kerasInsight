@@ -12,7 +12,7 @@ from retrieval.information_retriever import InformationRetriever
 from llm.llm_responder import LLMResponder
 from llm.gemini_responder import GeminiResponder
 from evaluation.gemini_evaluator import GeminiRAGEvaluator
-
+import os
 # from evaluation.rag_evaluator import RAGEvaluator
 from config import API_KEY, INDEX_NAME, MODEL_NAME, OLLAMA_MODEL_NAME, OPENAI_API_KEY,GEMMA_MODEL_SAVED_DIR,GEMINI_API_KEY #use of config is like this
 
@@ -27,7 +27,7 @@ class QueryInput(BaseModel):
 async def read_root():
     return {"message": "Hello World"}
 @router.post("/scrape") #Working good slight changes in returning can be seen
-async def scrape_endpoints(url_input: URLInput):
+async def scrape_endpoints():
     """
     Scrape a list of URLs and store the extracted data in the Pinecone index.
 
@@ -41,10 +41,16 @@ async def scrape_endpoints(url_input: URLInput):
     pinecone_manager = PineconeManager(API_KEY, INDEX_NAME)
     pinecone_manager.initialize_index()
     embedder = TextEmbedder(MODEL_NAME)
-    
+    html_files = []
+    dir_to_work_with = r'C:\Users\User\OneDrive\Desktop\dl document loader\keras website\keras.io\api'
+
+    for root, dirs, files in os.walk(dir_to_work_with):
+        for file in files:
+            if file.endswith(".html"):
+                html_files.append(os.path.join(root,file))
     async with aiohttp.ClientSession() as session:
         scraper = WebScraper(session, embedder, pinecone_manager.index)
-        scraped_data = await scraper.scrape_urls(url_input.urls)
+        scraped_data = await scraper.scrape_files(html_files)
     
     return {"message": "Scraping completed", "data": scraped_data}
 
